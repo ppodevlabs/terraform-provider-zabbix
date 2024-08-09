@@ -33,6 +33,7 @@ description: |-
 - **interface** (List of Object) Host interfaces (see [below for nested schema](#nestedatt--interface))
 - **inventory** (List of Object) (see [below for nested schema](#nestedatt--inventory))
 - **proxyid** (String) ID of proxy to monitor this host
+- **monitored_by** (String) 1 if monitored by proxy, else 0
 
 <a id="nestedblock--macro"></a>
 ### Nested Schema for `macro`

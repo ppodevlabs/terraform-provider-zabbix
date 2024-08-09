@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
 
-	"github.com/tpretz/go-zabbix-api"
+	"github.com/kulikovav/go-zabbix-api"
 )
 
 var HSNMP_LOOKUP = map[string]zabbix.ItemType{
@@ -200,6 +200,10 @@ var hostSchemaBase = map[string]*schema.Schema{
 	"proxyid": &schema.Schema{
 		Type:        schema.TypeString,
 		Description: "ID of proxy to monitor this host",
+	},
+	"monitored_by": &schema.Schema{
+		Type:		schema.TypeString,
+		Description: "1 if monitored by proxy, else 0",
 	},
 	"enabled": &schema.Schema{
 		Type:        schema.TypeBool,
@@ -402,7 +406,7 @@ func hostResourceSchema(m map[string]*schema.Schema) (o map[string]*schema.Schem
 		switch k {
 		case "host", "interface", "groups":
 			schema.Required = true
-		case "templates", "proxyid", "inventory":
+		case "templates", "proxyid", "inventory", "monitored_by":
 			schema.Optional = true
 		}
 
@@ -411,6 +415,7 @@ func hostResourceSchema(m map[string]*schema.Schema) (o map[string]*schema.Schem
 
 	o["proxyid"].ValidateFunc = validation.StringIsNotWhiteSpace
 	o["proxyid"].Default = "0"
+	o["monitored_by"].Default = "1"
 	return o
 }
 
@@ -425,7 +430,7 @@ func hostDataSchema(m map[string]*schema.Schema) (o map[string]*schema.Schema) {
 		case "host", "templates":
 			schema.Optional = true
 			fallthrough
-		case "interface", "groups", "macro", "proxyid", "inventory":
+		case "interface", "groups", "macro", "proxyid", "monitored_by", "inventory":
 			schema.Computed = true
 		}
 
@@ -545,6 +550,7 @@ func buildHostObject(d *schema.ResourceData, m interface{}) (*zabbix.Host, error
 		Host:          d.Get("host").(string),
 		Name:          d.Get("name").(string),
 		ProxyID:       d.Get("proxyid").(string),
+		MonitoredBy:   d.Get("monitored_by").(string),
 		InventoryMode: HINV_LOOKUP[d.Get("inventory_mode").(string)],
 		Status:        0,
 	}
@@ -675,6 +681,7 @@ func hostRead(d *schema.ResourceData, m interface{}, params zabbix.Params) error
 	d.Set("name", host.Name)
 	d.Set("host", host.Host)
 	d.Set("proxyid", host.ProxyID)
+	d.Set("monitored_by", host.MonitoredBy)
 	d.Set("enabled", host.Status == 0)
 	d.Set("inventory_mode", HINV_LOOKUP_REV[host.InventoryMode])
 

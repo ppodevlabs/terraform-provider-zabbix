@@ -8,7 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
-	"github.com/tpretz/go-zabbix-api"
+	"github.com/kulikovav/go-zabbix-api"
 )
 
 // Item Type Conversion and lookup tables
