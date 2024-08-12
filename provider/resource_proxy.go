@@ -11,7 +11,7 @@ import (
 
 // proxySchemaBase base proxy schema
 var proxySchemaBase = map[string]*schema.Schema{
-	"host": &schema.Schema{
+	"name": &schema.Schema{
 		Type:         schema.TypeString,
 		Description:  "FQDN of proxy",
 		ValidateFunc: validation.StringIsNotWhiteSpace,
@@ -30,11 +30,10 @@ func dataProxy() *schema.Resource {
 // dataProxyRead read handler for data resource
 func dataProxyRead(d *schema.ResourceData, m interface{}) error {
 	params := zabbix.Params{
-		"selectInterface": "extend",
 		"filter":          map[string]interface{}{},
 	}
 
-	lookups := []string{"host"}
+	lookups := []string{"name"}
 	for _, k := range lookups {
 		if v, ok := d.GetOk(k); ok {
 			params["filter"].(map[string]interface{})[k] = v
@@ -73,7 +72,7 @@ func proxyRead(d *schema.ResourceData, m interface{}, params zabbix.Params) erro
 	log.Debug("Got proxy: %+v", proxy)
 
 	d.SetId(proxy.ProxyID)
-	d.Set("host", proxy.Host)
+	d.Set("name", proxy.Name)
 
 	return nil
 }
