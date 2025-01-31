@@ -1,6 +1,8 @@
 package provider
 
 import (
+	"errors"
+	"fmt"
 	logger "log"
 
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
@@ -15,17 +17,24 @@ func Provider() *schema.Provider {
 		Schema: map[string]*schema.Schema{
 			"username": &schema.Schema{
 				Type:         schema.TypeString,
-				Required:     true,
+				Optional:     true,
 				Description:  "Zabbix API username",
 				ValidateFunc: validation.StringIsNotWhiteSpace,
 				DefaultFunc:  schema.MultiEnvDefaultFunc([]string{"ZABBIX_USER", "ZABBIX_USERNAME"}, nil),
 			},
 			"password": &schema.Schema{
 				Type:         schema.TypeString,
-				Required:     true,
+				Optional:     true,
 				Description:  "Zabbix API password",
 				ValidateFunc: validation.StringIsNotWhiteSpace,
 				DefaultFunc:  schema.MultiEnvDefaultFunc([]string{"ZABBIX_PASS", "ZABBIX_PASSWORD"}, nil),
+			},
+			"token": &schema.Schema{
+				Type:         schema.TypeString,
+				Optional:     true,
+				Description:  "Zabbix Token",
+				ValidateFunc: validation.StringIsNotWhiteSpace,
+				DefaultFunc:  schema.MultiEnvDefaultFunc([]string{"ZABBIX_TOKEN"}, nil),
 			},
 			"url": &schema.Schema{
 				Type:         schema.TypeString,
@@ -112,8 +121,18 @@ func Provider() *schema.Provider {
 
 // providerConfigure configure this provider
 func providerConfigure(d *schema.ResourceData) (meta interface{}, err error) {
+	fmt.Println("hola")
 	log.Trace("Started zabbix provider init")
+	log.Trace(fmt.Sprintf("token: %s", d.Get("token").(string)))
 	l := logger.New(stderr, "[DEBUG] ", logger.LstdFlags)
+
+	// we need one of these options
+	if (d.Get("username").(string) == "" ||
+		d.Get("password").(string) == "") &&
+		d.Get("token").(string) == "" {
+		log.Error("credentials required")
+		return nil, errors.New("credentials required")
+	}
 
 	api, apierr := zabbix.NewAPI(zabbix.Config{
 		Url:         d.Get("url").(string),
@@ -125,7 +144,11 @@ func providerConfigure(d *schema.ResourceData) (meta interface{}, err error) {
 		return nil, apierr
 	}
 
-	_, err = api.Login(d.Get("username").(string), d.Get("password").(string))
+	if d.Get("token").(string) != "" {
+		api.Auth = d.Get("token").(string)
+	} else {
+		_, err = api.Login(d.Get("username").(string), d.Get("password").(string))
+	}
 	meta = api
 	log.Trace("Started zabbix provider got error: %+v", err)
 
