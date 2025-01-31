@@ -202,7 +202,7 @@ var hostSchemaBase = map[string]*schema.Schema{
 		Description: "ID of proxy to monitor this host",
 	},
 	"monitored_by": &schema.Schema{
-		Type:		schema.TypeString,
+		Type:        schema.TypeString,
 		Description: "1 if monitored by proxy, else 0",
 	},
 	"enabled": &schema.Schema{
@@ -404,9 +404,9 @@ func hostResourceSchema(m map[string]*schema.Schema) (o map[string]*schema.Schem
 
 		// required
 		switch k {
-		case "host", "interface", "groups":
+		case "host", "groups":
 			schema.Required = true
-		case "templates", "proxyid", "inventory", "monitored_by":
+		case "templates", "proxyid", "interface", "inventory", "monitored_by":
 			schema.Optional = true
 		}
 
