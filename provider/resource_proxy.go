@@ -2,10 +2,9 @@ package provider
 
 import (
 	"errors"
-
+	"fmt"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
-
 	"github.com/kulikovav/go-zabbix-api"
 )
 
@@ -29,30 +28,23 @@ func dataProxy() *schema.Resource {
 
 // dataProxyRead read handler for data resource
 func dataProxyRead(d *schema.ResourceData, m interface{}) error {
-	params := zabbix.Params{
-		"filter":          map[string]interface{}{},
-	}
 
-	lookups := []string{"name"}
-	for _, k := range lookups {
-		if v, ok := d.GetOk(k); ok {
-			params["filter"].(map[string]interface{})[k] = v
-		}
+	api := m.(*zabbix.API)
+	hostName := "name"
+	if api.Config.Version < 700000 {
+		hostName = "host"
 	}
-
-	if len(params["filter"].(map[string]interface{})) < 1 {
-		return errors.New("no proxy lookup attribute")
-	}
-	log.Debug("performing data lookup with params: %#v", params)
-
-	return proxyRead(d, m, params)
+	log.Trace(fmt.Sprintf("version: %d", api.Config.Version))
+	return proxyRead(d, m, zabbix.Params{
+		"filter": map[string]interface{}{
+			hostName: d.Get("name"),
+		},
+	})
 }
 
 // proxyRead common proxy read function
 func proxyRead(d *schema.ResourceData, m interface{}, params zabbix.Params) error {
 	api := m.(*zabbix.API)
-
-	log.Debug("Lookup of proxy with params %#v", params)
 
 	proxys, err := api.ProxiesGet(params)
 
@@ -61,8 +53,7 @@ func proxyRead(d *schema.ResourceData, m interface{}, params zabbix.Params) erro
 	}
 
 	if len(proxys) < 1 {
-		d.SetId("")
-		return nil
+		return errors.New("proxy not found")
 	}
 	if len(proxys) > 1 {
 		return errors.New("multiple proxys found")
