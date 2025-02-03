@@ -2,7 +2,7 @@ package provider
 
 import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	"github.com/kulikovav/go-zabbix-api"
+	"github.com/ppodevlabs/go-zabbix-api"
 )
 
 // terraform resource handler for item type

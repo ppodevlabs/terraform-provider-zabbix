@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
 
-	"github.com/kulikovav/go-zabbix-api"
+	"github.com/ppodevlabs/go-zabbix-api"
 )
 
 var HSNMP_LOOKUP = map[string]zabbix.ItemType{
@@ -546,15 +546,20 @@ func hostGenerateInventory(d *schema.ResourceData) (zabbix.Inventory, error) {
 
 // buildHostObject create host struct
 func buildHostObject(d *schema.ResourceData, m interface{}) (*zabbix.Host, error) {
+	api := m.(*zabbix.API)
+	proxyId := d.Get("proxyid").(string)
 	item := zabbix.Host{
 		Host:          d.Get("host").(string),
 		Name:          d.Get("name").(string),
-		ProxyID:       d.Get("proxyid").(string),
 		MonitoredBy:   d.Get("monitored_by").(string),
 		InventoryMode: HINV_LOOKUP[d.Get("inventory_mode").(string)],
 		Status:        0,
 	}
-
+	if api.Config.Version < 70000 {
+		item.ProxyHostID = proxyId
+	} else {
+		item.ProxyID = proxyId
+	}
 	if !d.Get("enabled").(bool) {
 		item.Status = 1
 	}
@@ -680,11 +685,14 @@ func hostRead(d *schema.ResourceData, m interface{}, params zabbix.Params) error
 	d.SetId(host.HostID)
 	d.Set("name", host.Name)
 	d.Set("host", host.Host)
-	d.Set("proxyid", host.ProxyID)
 	d.Set("monitored_by", host.MonitoredBy)
 	d.Set("enabled", host.Status == 0)
 	d.Set("inventory_mode", HINV_LOOKUP_REV[host.InventoryMode])
-
+	if api.Config.Version < 70000 {
+		d.Set("proxyid", host.ProxyHostID)
+	} else {
+		d.Set("proxyid", host.ProxyID)
+	}
 	d.Set("interface", flattenHostInterfaces(host, d, m))
 	d.Set("templates", flattenTemplateIds(host.ParentTemplateIDs))
 	d.Set("inventory", flattenInventory(host))

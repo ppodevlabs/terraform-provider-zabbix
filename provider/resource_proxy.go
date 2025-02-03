@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/helper/validation"
-	"github.com/kulikovav/go-zabbix-api"
+	"github.com/ppodevlabs/go-zabbix-api"
 )
 
 // proxySchemaBase base proxy schema
@@ -31,7 +31,7 @@ func dataProxyRead(d *schema.ResourceData, m interface{}) error {
 
 	api := m.(*zabbix.API)
 	hostName := "name"
-	if api.Config.Version < 700000 {
+	if api.Config.Version < 70000 {
 		hostName = "host"
 	}
 	log.Trace(fmt.Sprintf("version: %d", api.Config.Version))
