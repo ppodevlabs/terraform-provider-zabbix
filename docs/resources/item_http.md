@@ -17,7 +17,7 @@ description: |-
 
 ### Required
 
-- `hostid` (String) Host ID
+- `hostid` (String) Host/Template ID
 - `key` (String) Item KEY
 - `name` (String) Item Name
 - `url` (String) url to probe
@@ -26,7 +26,7 @@ description: |-
 ### Optional
 
 - `applications` (Set of String) Application IDs to associate this item with
-- `auth_type` (String) HTTP auth type, one of: kerberos, none, basic, ntlm
+- `auth_type` (String) HTTP auth type, one of: none, basic, ntlm, kerberos
 - `delay` (String) Item Delay period
 - `description` (String) Item Description
 - `follow_redirects` (Boolean) follow http redirects
@@ -38,7 +38,7 @@ description: |-
 - `posts` (String) POST data to send in request
 - `preprocessor` (Block List) (see [below for nested schema](#nestedblock--preprocessor))
 - `proxy` (String) HTTP proxy connection string
-- `request_method` (String) HTTP request method, one of: put, head, get, post
+- `request_method` (String) HTTP request method, one of: head, get, post, put
 - `retrieve_mode` (String) HTTP retrieve mode, one of: body, headers, both
 - `status_codes` (String) http status code
 - `tag` (Block Set) (see [below for nested schema](#nestedblock--tag))

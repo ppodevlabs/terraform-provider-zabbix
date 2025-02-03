@@ -46,7 +46,7 @@ Required:
 
 Optional:
 
-- `operator` (String) Operator, one of: notmatch, match
+- `operator` (String) Operator, one of: match, notmatch
 
 Read-Only:
 

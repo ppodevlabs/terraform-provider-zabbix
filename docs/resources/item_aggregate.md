@@ -17,7 +17,7 @@ description: |-
 
 ### Required
 
-- `hostid` (String) Host ID
+- `hostid` (String) Host/Template ID
 - `key` (String) Item KEY
 - `name` (String) Item Name
 - `valuetype` (String) Item Value Type, one of: float, character, log, unsigned, text

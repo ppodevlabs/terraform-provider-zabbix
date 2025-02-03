@@ -40,7 +40,7 @@ var itemCommonSchema = map[string]*schema.Schema{
 		Type:         schema.TypeString,
 		Required:     true,
 		ForceNew:     true,
-		Description:  "Host ID",
+		Description:  "Host/Template ID",
 		ValidateFunc: validation.StringMatch(regexp.MustCompile("^[0-9]+$"), "must be numeric"),
 	},
 	"key": &schema.Schema{

@@ -17,7 +17,7 @@ description: |-
 
 ### Required
 
-- `hostid` (String) Host ID
+- `hostid` (String) Host/Template ID
 - `key` (String) Item KEY
 - `master_itemid` (String) Master Item ID
 - `name` (String) Item Name
