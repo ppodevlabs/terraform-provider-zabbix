@@ -32,7 +32,7 @@ func Provider() *schema.Provider {
 			"token": &schema.Schema{
 				Type:         schema.TypeString,
 				Optional:     true,
-				Description:  "Zabbix Token",
+				Description:  "Zabbix Api Token",
 				ValidateFunc: validation.StringIsNotWhiteSpace,
 				DefaultFunc:  schema.MultiEnvDefaultFunc([]string{"ZABBIX_TOKEN"}, nil),
 			},

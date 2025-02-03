@@ -17,40 +17,44 @@ description: |-
 
 ### Required
 
-- **hostid** (String) Host ID
-- **key** (String) Item KEY
-- **name** (String) Item Name
-- **ruleid** (String) LLD Rule ID
-- **valuetype** (String) Item Value Type, one of: float, character, log, unsigned, text
+- `hostid` (String) Host ID
+- `key` (String) Item KEY
+- `name` (String) Item Name
+- `ruleid` (String) LLD Rule ID
+- `valuetype` (String) Item Value Type, one of: float, character, log, unsigned, text
 
 ### Optional
 
-- **active** (Boolean) Active zabbix agent Item
-- **applications** (Set of String) Application IDs to associate this item with
-- **delay** (String) Item Delay period
-- **history** (String) Item History
-- **id** (String) The ID of this resource.
-- **interfaceid** (String) Host Interface ID
-- **preprocessor** (Block List) (see [below for nested schema](#nestedblock--preprocessor))
-- **tag** (Block Set) (see [below for nested schema](#nestedblock--tag))
-- **trends** (String) Item Trends
+- `active` (Boolean) Active zabbix agent Item
+- `applications` (Set of String) Application IDs to associate this item with
+- `delay` (String) Item Delay period
+- `description` (String) Item Description
+- `history` (String) Item History
+- `interfaceid` (String) Host Interface ID
+- `preprocessor` (Block List) (see [below for nested schema](#nestedblock--preprocessor))
+- `tag` (Block Set) (see [below for nested schema](#nestedblock--tag))
+- `trends` (String) Item Trends
+
+### Read-Only
+
+- `id` (String) The ID of this resource.
 
 <a id="nestedblock--preprocessor"></a>
 ### Nested Schema for `preprocessor`
 
 Required:
 
-- **type** (String) Preprocessor type, zabbix identifier number
+- `type` (String) Preprocessor type, zabbix identifier number
 
 Optional:
 
-- **error_handler** (String)
-- **error_handler_params** (String)
-- **params** (List of String) Preprocessor parameters
+- `error_handler` (String)
+- `error_handler_params` (String)
+- `params` (List of String) Preprocessor parameters
 
 Read-Only:
 
-- **id** (String) The ID of this resource.
+- `id` (String)
 
 
 <a id="nestedblock--tag"></a>
@@ -58,10 +62,8 @@ Read-Only:
 
 Required:
 
-- **key** (String) Tag Key
+- `key` (String) Tag Key
 
 Optional:
 
-- **value** (String) Tag Value
-
-
+- `value` (String) Tag Value

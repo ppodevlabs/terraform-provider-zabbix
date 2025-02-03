@@ -17,26 +17,24 @@ description: |-
 
 ### Optional
 
-- **host** (String) Template hostname (internal name)
-- **id** (String) The ID of this resource.
-- **macro** (Block List) (see [below for nested schema](#nestedblock--macro))
-- **name** (String) Template Display Name (defaults to host)
+- `host` (String) Template hostname (internal name)
+- `macro` (Block List) (see [below for nested schema](#nestedblock--macro))
+- `name` (String) Template Display Name (defaults to host)
 
 ### Read-Only
 
-- **description** (String) Template description
-- **groups** (Set of String) Host Group IDs
+- `description` (String) Template description
+- `groups` (Set of String) Host Group IDs
+- `id` (String) The ID of this resource.
 
 <a id="nestedblock--macro"></a>
 ### Nested Schema for `macro`
 
 Required:
 
-- **name** (String) Macro Name (key)
-- **value** (String) Macro Value
+- `name` (String) Macro Name (key)
+- `value` (String) Macro Value
 
 Read-Only:
 
-- **id** (String) The ID of this resource.
-
-
+- `id` (String)

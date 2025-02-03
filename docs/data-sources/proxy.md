@@ -17,10 +17,8 @@ description: |-
 
 ### Required
 
-- **host** (String) FQDN of proxy
+- `name` (String) FQDN of proxy
 
-### Optional
+### Read-Only
 
-- **id** (String) The ID of this resource.
-
-
+- `id` (String) The ID of this resource.

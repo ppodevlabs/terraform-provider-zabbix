@@ -17,11 +17,12 @@ description: |-
 
 ### Required
 
-- **name** (String) Application Name
+- `name` (String) Application Name
 
 ### Optional
 
-- **hostid** (String) Host ID
-- **id** (String) The ID of this resource.
+- `hostid` (String) Host ID
 
+### Read-Only
 
+- `id` (String) The ID of this resource.

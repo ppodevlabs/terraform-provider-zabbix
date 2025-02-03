@@ -14,11 +14,15 @@ The Zabbix provider provides resources to interact with a Zabbix Monitoring Serv
 ```terraform
 provider "zabbix" {
   # Required
-  username = "<api_user>"
-  password = "<api_password>"
   url = "http://example.com/api_jsonrpc.php"
   
   # Optional
+
+  # use one of username/password or token
+  username = "<api_user>"
+  password = "<api_password>"
+
+  token = "<api_token>"
 
   # Disable TLS verfication (false by default)
   tls_insecure = true
@@ -34,11 +38,12 @@ provider "zabbix" {
 
 ### Required
 
-- **password** (String) Zabbix API password
-- **url** (String) Zabbix API url
-- **username** (String) Zabbix API username
+- `url` (String) Zabbix API url
 
 ### Optional
 
-- **serialize** (Boolean) Serialize API requests, if required due to API race conditions
-- **tls_insecure** (Boolean) Disable TLS certificate checking (for testing use only)
+- `password` (String) Zabbix API password
+- `serialize` (Boolean) Serialize API requests, if required due to API race conditions
+- `tls_insecure` (Boolean) Disable TLS certificate checking (for testing use only)
+- `token` (String) Zabbix Api Token
+- `username` (String) Zabbix API username

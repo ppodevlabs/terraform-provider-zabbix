@@ -17,47 +17,50 @@ description: |-
 
 ### Required
 
-- **hostid** (String) Host ID
-- **key** (String) LLD KEY
-- **name** (String) LLD Name
-- **snmp_oid** (String) SNMP OID
+- `hostid` (String) Host ID
+- `key` (String) LLD KEY
+- `name` (String) LLD Name
+- `snmp_oid` (String) SNMP OID
 
 ### Optional
 
-- **condition** (Block List) (see [below for nested schema](#nestedblock--condition))
-- **delay** (String) LLD Delay period
-- **evaltype** (String) EvalType, one of: or, custom, andor, and
-- **formula** (String) Formula
-- **id** (String) The ID of this resource.
-- **interfaceid** (String) Host Interface ID
-- **lifetime** (String) LLD Stale Item Lifetime
-- **macro** (Block Set) (see [below for nested schema](#nestedblock--macro))
-- **preprocessor** (Block List) (see [below for nested schema](#nestedblock--preprocessor))
-- **snmp3_authpassphrase** (String) Authentication Passphrase (v3 only)
-- **snmp3_authprotocol** (String) Authentication Protocol (v3 only), one of: md5, sha
-- **snmp3_contextname** (String) Context Name (v3 only)
-- **snmp3_privpassphrase** (String) Priv Passphrase (v3 only)
-- **snmp3_privprotocol** (String) Priv Protocol (v3 only), one of: aes, des
-- **snmp3_securitylevel** (String) Security Level (v3 only), one of: noauthnopriv, authnopriv, authpriv
-- **snmp3_securityname** (String) Security Name (v3 only)
-- **snmp_community** (String) SNMP Community (v1/v2 only)
-- **snmp_version** (String) SNMP Version, one of: 1, 2, 3
+- `condition` (Block List) (see [below for nested schema](#nestedblock--condition))
+- `delay` (String) LLD Delay period
+- `evaltype` (String) EvalType, one of: andor, and, or, custom
+- `formula` (String) Formula
+- `interfaceid` (String) Host Interface ID
+- `lifetime` (String) LLD Stale Item Lifetime
+- `macro` (Block Set) (see [below for nested schema](#nestedblock--macro))
+- `preprocessor` (Block List) (see [below for nested schema](#nestedblock--preprocessor))
+- `snmp3_authpassphrase` (String) Authentication Passphrase (v3 only)
+- `snmp3_authprotocol` (String) Authentication Protocol (v3 only), one of: md5, sha
+- `snmp3_contextname` (String) Context Name (v3 only)
+- `snmp3_privpassphrase` (String) Priv Passphrase (v3 only)
+- `snmp3_privprotocol` (String) Priv Protocol (v3 only), one of: des, aes
+- `snmp3_securitylevel` (String) Security Level (v3 only), one of: noauthnopriv, authnopriv, authpriv
+- `snmp3_securityname` (String) Security Name (v3 only)
+- `snmp_community` (String) SNMP Community (v1/v2 only)
+- `snmp_version` (String) SNMP Version, one of: 3, 1, 2
+
+### Read-Only
+
+- `id` (String) The ID of this resource.
 
 <a id="nestedblock--condition"></a>
 ### Nested Schema for `condition`
 
 Required:
 
-- **macro** (String) Filter Macro
-- **value** (String) Filter Value
+- `macro` (String) Filter Macro
+- `value` (String) Filter Value
 
 Optional:
 
-- **operator** (String) Operator, one of: match, notmatch
+- `operator` (String) Operator, one of: notmatch, match
 
 Read-Only:
 
-- **id** (String) The ID of this resource.
+- `id` (String)
 
 
 <a id="nestedblock--macro"></a>
@@ -65,8 +68,8 @@ Read-Only:
 
 Required:
 
-- **macro** (String) Macro
-- **path** (String) Macro Path
+- `macro` (String) Macro
+- `path` (String) Macro Path
 
 
 <a id="nestedblock--preprocessor"></a>
@@ -74,16 +77,14 @@ Required:
 
 Required:
 
-- **type** (String) Preprocessor type, zabbix identifier number
+- `type` (String) Preprocessor type, zabbix identifier number
 
 Optional:
 
-- **error_handler** (String)
-- **error_handler_params** (String)
-- **params** (List of String) Preprocessor parameters
+- `error_handler` (String)
+- `error_handler_params` (String)
+- `params` (List of String) Preprocessor parameters
 
 Read-Only:
 
-- **id** (String) The ID of this resource.
-
-
+- `id` (String)

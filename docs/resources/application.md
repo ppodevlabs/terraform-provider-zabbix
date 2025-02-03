@@ -17,11 +17,9 @@ description: |-
 
 ### Required
 
-- **hostid** (String) Host ID
-- **name** (String) Application Name
+- `hostid` (String) Host ID
+- `name` (String) Application Name
 
-### Optional
+### Read-Only
 
-- **id** (String) The ID of this resource.
-
-
+- `id` (String) The ID of this resource.

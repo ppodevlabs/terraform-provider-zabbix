@@ -17,33 +17,34 @@ description: |-
 
 ### Required
 
-- **expression** (String) Trigger Expression
-- **name** (String) Trigger name
+- `expression` (String) Trigger Expression
+- `name` (String) Trigger name
 
 ### Optional
 
-- **comments** (String) Trigger comments
-- **correlation_tag** (String) correlation tag
-- **dependencies** (Set of String) Trigger Dependencies
-- **enabled** (Boolean) Enable this trigger
-- **id** (String) The ID of this resource.
-- **manual_close** (Boolean) Manual resolution
-- **multiple** (Boolean) generate multiple events
-- **priority** (String) Trigger Priority level, one of: high, disaster, not_classified, info, warn, average
-- **recovery_expression** (String) use recovery expression (recovery_none must not be true)
-- **recovery_none** (Boolean) set recovery mode to none
-- **tag** (Block Set) (see [below for nested schema](#nestedblock--tag))
-- **url** (String) link to url relevent to trigger
+- `comments` (String) Trigger comments
+- `correlation_tag` (String) correlation tag
+- `dependencies` (Set of String) Trigger Dependencies
+- `enabled` (Boolean) Enable this trigger
+- `manual_close` (Boolean) Manual resolution
+- `multiple` (Boolean) generate multiple events
+- `priority` (String) Trigger Priority level, one of: warn, average, high, disaster, not_classified, info
+- `recovery_expression` (String) use recovery expression (recovery_none must not be true)
+- `recovery_none` (Boolean) set recovery mode to none
+- `tag` (Block Set) (see [below for nested schema](#nestedblock--tag))
+- `url` (String) link to url relevent to trigger
+
+### Read-Only
+
+- `id` (String) The ID of this resource.
 
 <a id="nestedblock--tag"></a>
 ### Nested Schema for `tag`
 
 Required:
 
-- **key** (String) Tag Key
+- `key` (String) Tag Key
 
 Optional:
 
-- **value** (String) Tag Value
-
-
+- `value` (String) Tag Value

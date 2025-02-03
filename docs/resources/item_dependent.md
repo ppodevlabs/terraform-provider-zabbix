@@ -17,37 +17,41 @@ description: |-
 
 ### Required
 
-- **hostid** (String) Host ID
-- **key** (String) Item KEY
-- **master_itemid** (String) Master Item ID
-- **name** (String) Item Name
-- **valuetype** (String) Item Value Type, one of: float, character, log, unsigned, text
+- `hostid` (String) Host ID
+- `key` (String) Item KEY
+- `master_itemid` (String) Master Item ID
+- `name` (String) Item Name
+- `valuetype` (String) Item Value Type, one of: float, character, log, unsigned, text
 
 ### Optional
 
-- **applications** (Set of String) Application IDs to associate this item with
-- **history** (String) Item History
-- **id** (String) The ID of this resource.
-- **preprocessor** (Block List) (see [below for nested schema](#nestedblock--preprocessor))
-- **tag** (Block Set) (see [below for nested schema](#nestedblock--tag))
-- **trends** (String) Item Trends
+- `applications` (Set of String) Application IDs to associate this item with
+- `description` (String) Item Description
+- `history` (String) Item History
+- `preprocessor` (Block List) (see [below for nested schema](#nestedblock--preprocessor))
+- `tag` (Block Set) (see [below for nested schema](#nestedblock--tag))
+- `trends` (String) Item Trends
+
+### Read-Only
+
+- `id` (String) The ID of this resource.
 
 <a id="nestedblock--preprocessor"></a>
 ### Nested Schema for `preprocessor`
 
 Required:
 
-- **type** (String) Preprocessor type, zabbix identifier number
+- `type` (String) Preprocessor type, zabbix identifier number
 
 Optional:
 
-- **error_handler** (String)
-- **error_handler_params** (String)
-- **params** (List of String) Preprocessor parameters
+- `error_handler` (String)
+- `error_handler_params` (String)
+- `params` (List of String) Preprocessor parameters
 
 Read-Only:
 
-- **id** (String) The ID of this resource.
+- `id` (String)
 
 
 <a id="nestedblock--tag"></a>
@@ -55,10 +59,8 @@ Read-Only:
 
 Required:
 
-- **key** (String) Tag Key
+- `key` (String) Tag Key
 
 Optional:
 
-- **value** (String) Tag Value
-
-
+- `value` (String) Tag Value

@@ -1,10 +1,14 @@
 provider "zabbix" {
   # Required
-  username = "<api_user>"
-  password = "<api_password>"
   url = "http://example.com/api_jsonrpc.php"
   
   # Optional
+
+  # use one of username/password or token
+  username = "<api_user>"
+  password = "<api_password>"
+
+  token = "<api_token>"
 
   # Disable TLS verfication (false by default)
   tls_insecure = true

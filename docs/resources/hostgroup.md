@@ -17,10 +17,8 @@ description: |-
 
 ### Required
 
-- **name** (String) Hostgroup Name
+- `name` (String) Hostgroup Name
 
-### Optional
+### Read-Only
 
-- **id** (String) The ID of this resource.
-
-
+- `id` (String) The ID of this resource.

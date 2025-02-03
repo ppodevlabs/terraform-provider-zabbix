@@ -55,6 +55,12 @@ var itemCommonSchema = map[string]*schema.Schema{
 		ValidateFunc: validation.StringIsNotWhiteSpace,
 		Required:     true,
 	},
+	"description": &schema.Schema{
+		Type:         schema.TypeString,
+		Description:  "Item Description",
+		ValidateFunc: validation.StringLenBetween(0, 65535),
+		Optional:     true,
+	},
 	"history": &schema.Schema{
 		Type:         schema.TypeString,
 		Description:  "Item History",
@@ -320,6 +326,7 @@ func resourceItemRead(d *schema.ResourceData, m interface{}, r ItemHandler, prot
 	d.Set("hostid", item.HostID)
 	d.Set("key", item.Key)
 	d.Set("name", item.Name)
+	d.Set("description", item.Description)
 	d.Set("history", item.History)
 	d.Set("trends", item.Trends)
 	d.Set("valuetype", ITEM_VALUE_TYPES_REV[item.ValueType])
@@ -344,12 +351,13 @@ func resourceItemRead(d *schema.ResourceData, m interface{}, r ItemHandler, prot
 // Build the base Item Object
 func buildItemObject(d *schema.ResourceData, api *zabbix.API, prototype bool) *zabbix.Item {
 	item := zabbix.Item{
-		Key:       d.Get("key").(string),
-		HostID:    d.Get("hostid").(string),
-		Name:      d.Get("name").(string),
-		History:   d.Get("history").(string),
-		Trends:    d.Get("trends").(string),
-		ValueType: ITEM_VALUE_TYPES[d.Get("valuetype").(string)],
+		Key:         d.Get("key").(string),
+		HostID:      d.Get("hostid").(string),
+		Name:        d.Get("name").(string),
+		History:     d.Get("history").(string),
+		Trends:      d.Get("trends").(string),
+		Description: d.Get("description").(string),
+		ValueType:   ITEM_VALUE_TYPES[d.Get("valuetype").(string)],
 	}
 	item.Preprocessors = itemGeneratePreprocessors(d)
 	apps := d.Get("applications").(*schema.Set).List()

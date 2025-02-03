@@ -17,54 +17,58 @@ description: |-
 
 ### Required
 
-- **hostid** (String) Host ID
-- **key** (String) Item KEY
-- **name** (String) Item Name
-- **ruleid** (String) LLD Rule ID
-- **url** (String) url to probe
-- **valuetype** (String) Item Value Type, one of: float, character, log, unsigned, text
+- `hostid` (String) Host ID
+- `key` (String) Item KEY
+- `name` (String) Item Name
+- `ruleid` (String) LLD Rule ID
+- `url` (String) url to probe
+- `valuetype` (String) Item Value Type, one of: float, character, log, unsigned, text
 
 ### Optional
 
-- **applications** (Set of String) Application IDs to associate this item with
-- **auth_type** (String) HTTP auth type, one of: basic, ntlm, kerberos, none
-- **delay** (String) Item Delay period
-- **follow_redirects** (Boolean) follow http redirects
-- **headers** (Map of String)
-- **history** (String) Item History
-- **id** (String) The ID of this resource.
-- **interfaceid** (String) Host Interface ID
-- **password** (String, Sensitive) Authentication Password
-- **post_type** (String) HTTP post type, one of: xml, raw, json
-- **posts** (String) POST data to send in request
-- **preprocessor** (Block List) (see [below for nested schema](#nestedblock--preprocessor))
-- **proxy** (String) HTTP proxy connection string
-- **request_method** (String) HTTP request method, one of: get, post, put, head
-- **retrieve_mode** (String) HTTP retrieve mode, one of: body, headers, both
-- **status_codes** (String) http status code
-- **tag** (Block Set) (see [below for nested schema](#nestedblock--tag))
-- **timeout** (String) http request timeout
-- **trends** (String) Item Trends
-- **username** (String) Authentication Username
-- **verify_host** (Boolean) https verify host
-- **verify_peer** (Boolean) https verify peer
+- `applications` (Set of String) Application IDs to associate this item with
+- `auth_type` (String) HTTP auth type, one of: kerberos, none, basic, ntlm
+- `delay` (String) Item Delay period
+- `description` (String) Item Description
+- `follow_redirects` (Boolean) follow http redirects
+- `headers` (Map of String)
+- `history` (String) Item History
+- `interfaceid` (String) Host Interface ID
+- `password` (String, Sensitive) Authentication Password
+- `post_type` (String) HTTP post type, one of: raw, json, xml
+- `posts` (String) POST data to send in request
+- `preprocessor` (Block List) (see [below for nested schema](#nestedblock--preprocessor))
+- `proxy` (String) HTTP proxy connection string
+- `request_method` (String) HTTP request method, one of: put, head, get, post
+- `retrieve_mode` (String) HTTP retrieve mode, one of: body, headers, both
+- `status_codes` (String) http status code
+- `tag` (Block Set) (see [below for nested schema](#nestedblock--tag))
+- `timeout` (String) http request timeout
+- `trends` (String) Item Trends
+- `username` (String) Authentication Username
+- `verify_host` (Boolean) https verify host
+- `verify_peer` (Boolean) https verify peer
+
+### Read-Only
+
+- `id` (String) The ID of this resource.
 
 <a id="nestedblock--preprocessor"></a>
 ### Nested Schema for `preprocessor`
 
 Required:
 
-- **type** (String) Preprocessor type, zabbix identifier number
+- `type` (String) Preprocessor type, zabbix identifier number
 
 Optional:
 
-- **error_handler** (String)
-- **error_handler_params** (String)
-- **params** (List of String) Preprocessor parameters
+- `error_handler` (String)
+- `error_handler_params` (String)
+- `params` (List of String) Preprocessor parameters
 
 Read-Only:
 
-- **id** (String) The ID of this resource.
+- `id` (String)
 
 
 <a id="nestedblock--tag"></a>
@@ -72,10 +76,8 @@ Read-Only:
 
 Required:
 
-- **key** (String) Tag Key
+- `key` (String) Tag Key
 
 Optional:
 
-- **value** (String) Tag Value
-
-
+- `value` (String) Tag Value

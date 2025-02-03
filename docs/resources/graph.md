@@ -17,45 +17,46 @@ description: |-
 
 ### Required
 
-- **height** (String) Height
-- **item** (Block List, Min: 1) (see [below for nested schema](#nestedblock--item))
-- **name** (String) Graph Name
-- **width** (String) Width
+- `height` (String) Height
+- `item` (Block List, Min: 1) (see [below for nested schema](#nestedblock--item))
+- `name` (String) Graph Name
+- `width` (String) Width
 
 ### Optional
 
-- **do3d** (Boolean) Show 3d graph
-- **id** (String) The ID of this resource.
-- **legend** (Boolean) Show legend
-- **percent_left** (String) Left percentile
-- **percent_right** (String) Right percentile
-- **type** (String) Type, one of: normal, stacked, pie, exploded
-- **work_period** (Boolean) Show work period
-- **ymax** (String) Y Axis Max
-- **ymax_itemid** (String) Y Axis Max ItemId
-- **ymax_type** (String) Y Axis Max Type, one of: calculated, fixed, item
-- **ymin** (String) Y Axis Min
-- **ymin_itemid** (String) Y Axis Min ItemId
-- **ymin_type** (String) Y Axis Min Type, one of: calculated, fixed, item
+- `do3d` (Boolean) Show 3d graph
+- `legend` (Boolean) Show legend
+- `percent_left` (String) Left percentile
+- `percent_right` (String) Right percentile
+- `type` (String) Type, one of: normal, stacked, pie, exploded
+- `work_period` (Boolean) Show work period
+- `ymax` (String) Y Axis Max
+- `ymax_itemid` (String) Y Axis Max ItemId
+- `ymax_type` (String) Y Axis Max Type, one of: calculated, fixed, item
+- `ymin` (String) Y Axis Min
+- `ymin_itemid` (String) Y Axis Min ItemId
+- `ymin_type` (String) Y Axis Min Type, one of: calculated, fixed, item
+
+### Read-Only
+
+- `id` (String) The ID of this resource.
 
 <a id="nestedblock--item"></a>
 ### Nested Schema for `item`
 
 Required:
 
-- **color** (String) color
-- **itemid** (String) itemid
+- `color` (String) color
+- `itemid` (String) itemid
 
 Optional:
 
-- **drawtype** (String) Draw Type, one of: line, filled, bold, dot, dashed, gradient
-- **function** (String) Function, one of: min, average, max, all, last
-- **sortorder** (String) sort order
-- **type** (String) Type, one of: simple, sum
-- **yaxis_side** (String) Y Axis Side, one of: left, right
+- `drawtype` (String) Draw Type, one of: line, filled, bold, dot, dashed, gradient
+- `function` (String) Function, one of: average, max, all, last, min
+- `sortorder` (String) sort order
+- `type` (String) Type, one of: sum, simple
+- `yaxis_side` (String) Y Axis Side, one of: left, right
 
 Read-Only:
 
-- **id** (String) The ID of this resource.
-
-
+- `id` (String)
